@@ -1,6 +1,6 @@
 # AppleEmoji
 
-Get all emojis from https://emojipedia.org/"
+Get all emojis from https://emojipedia.org/
 
 
 ## Require
@@ -9,5 +9,5 @@ Get all emojis from https://emojipedia.org/"
 python3 
 
 ### Library
-. requests
-. BeautifulSoup
+* requests
+* BeautifulSoup
