@@ -1,4 +1,4 @@
-# AppleEmoji
+# emoji
 
 Get all emojis from https://unicode.org/emoji/charts/emoji-list.html
 
