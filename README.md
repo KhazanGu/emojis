@@ -1,6 +1,6 @@
 # AppleEmoji
 
-Get all emojis from https://emojipedia.org/
+Get all emojis from https://unicode.org/emoji/charts/emoji-list.html
 
 
 ## Require
@@ -11,3 +11,5 @@ python3
 ### Library
 * requests
 * BeautifulSoup
+
+

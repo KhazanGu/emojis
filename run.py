@@ -1,52 +1,40 @@
 import requests
 from bs4 import BeautifulSoup
 
-# https://emojipedia.org/
+url = "https://unicode.org/emoji/charts/emoji-list.html"
 
-emojipedia = "https://emojipedia.org/"
-
-# Categories
-people = emojipedia + "people"
-nature = emojipedia + "nature"
-food_drink = emojipedia + "food-drink"
-activity = emojipedia + "activity"
-travel_places = emojipedia + "travel-places"
-objects = emojipedia + "objects"
-symbols = emojipedia + "symbols"
-flags = emojipedia + "flags"
-
-urls = [people, nature, food_drink, activity, travel_places, objects, symbols, flags]
 
 def getHtml(url):
     html = requests.get(url)
-    return html.content
+    return html
 
 def soup(content):
     emojis = ""
+    category_emojis = ""
+
     soup = BeautifulSoup(content)
-    ul = soup.find("ul", class_="emoji-list css_test1")
-    # print(ul)
-    li_all = ul.find_all("li")
-    for li in li_all:
-        span = li.find("span", class_="emoji")
-        if span:
-            # print(span.text)
-            emojis += span.text
-    return emojis
+    table = soup.find("table")
+    all_tr = table.find_all("tr")
+    for tr in all_tr:
+        th = tr.find("th", class_="bighead")
+        if th:
+            a = th.find("a")
+            if a:
+                print(category_emojis)
+                category_emojis = ""
+                category = a.text
+                print("Category: " + category)
+        all_td = tr.find_all("td", class_="andr")
+        for td in all_td:
+            all_img = td.find_all("img", class_="imga")
+            for img in all_img:
+                alt = img["alt"]
+                category_emojis += alt
+                emojis += alt
+    print(category_emojis)
+    print("All emojis:\n" + emojis)
 
 
 
-# all emojis
-
-allEmojis = ""
-
-for url in urls:
-    content = getHtml(url)
-    emojis = soup(content)
-    allEmojis += emojis
-    category = url.split("/")[-1]
-    print(category + ":\n" + emojis)
-
-print("all emojis:\n" + allEmojis)
-
-
+html = getHtml(url)
+soup(html.content)
